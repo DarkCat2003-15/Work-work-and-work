@@ -1,0 +1,193 @@
+{
+  "info": {
+    "name": "API Cajero - Diagrama ER",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "1 Login - genera JWT y sesion",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var json = pm.response.json();",
+              "pm.collectionVariables.set(\"token\", json.token);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"12345\"\n}"
+        }
+      }
+    },
+    {
+      "name": "2 Listar clientes",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/clientes"
+      }
+    },
+    {
+      "name": "3 Listar cuentas del cliente 1",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/clientes/1/cuentas"
+      }
+    },
+    {
+      "name": "4 Listar cajeros",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/cajeros"
+      }
+    },
+    {
+      "name": "5 Depositar en cuenta 1",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/cajero/depositos",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cuentaId\": 1,\n  \"cajeroId\": 1,\n  \"monto\": 100\n}"
+        }
+      }
+    },
+    {
+      "name": "6 Retirar de cuenta 1",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/cajero/retiros",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cuentaId\": 1,\n  \"cajeroId\": 1,\n  \"monto\": 25\n}"
+        }
+      }
+    },
+    {
+      "name": "7 Consultar saldo cuenta 1",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/cajero/saldo?cuentaId=1&cajeroId=1"
+      }
+    },
+    {
+      "name": "8 Todas las transacciones",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/cajero/transacciones"
+      }
+    },
+    {
+      "name": "9 Transacciones de cuenta 1",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/cuentas/1/transacciones"
+      }
+    },
+    {
+      "name": "10 Estadisticas generales",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/cajero/estadisticas"
+      }
+    },
+    {
+      "name": "11 Estadisticas por periodo",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/cajero/estadisticas/periodo?mes=7&year=2026"
+      }
+    }
+  ]
+}
