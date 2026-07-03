@@ -102,7 +102,7 @@ API REST para la administración de tareas.
 
 ## 🎯 Objetivo
 
-Este repositorio tiene como finalidad registrar mi progreso profesional y académico mediante proyectos prácticos, aplicando buenas prácticas de desarrollo y fortaleciendo mis habilidades en tecnologías Backend.
+Este repositorio tiene como finalidad registrar mi progreso profesional y académico mediante proyectos prácticos, aplicando buenas prácticas de desarrollo y fortaleciendo mis habilidades en tecnologías FullStack.
 
 ---
 
